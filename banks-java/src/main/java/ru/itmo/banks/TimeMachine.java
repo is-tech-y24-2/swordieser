@@ -1,6 +1,6 @@
 package ru.itmo.banks;
 
-import ru.itmo.banks.banks.CentralBank;
+import ru.itmo.banks.bank.CentralBank;
 
 import java.time.LocalDate;
 
