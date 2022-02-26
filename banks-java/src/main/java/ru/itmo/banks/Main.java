@@ -1,11 +1,11 @@
 package ru.itmo.banks;
 
-import ru.itmo.banks.Accounts.BaseAccount;
-import ru.itmo.banks.Banks.Bank;
-import ru.itmo.banks.Banks.CentralBank;
-import ru.itmo.banks.Clients.Person;
-import ru.itmo.banks.Exceptions.*;
-import ru.itmo.banks.Transactions.Transaction;
+import ru.itmo.banks.accounts.BaseAccount;
+import ru.itmo.banks.banks.Bank;
+import ru.itmo.banks.banks.CentralBank;
+import ru.itmo.banks.clients.Person;
+import ru.itmo.banks.exceptions.*;
+import ru.itmo.banks.transactions.Transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
