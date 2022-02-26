@@ -7,7 +7,6 @@ import ru.itmo.banks.bank.CentralBank;
 import ru.itmo.banks.client.Person;
 
 import java.util.Map;
-//import org.testng.Assert;
 
 public class BankTest {
     private CentralBank centralBank = CentralBank.getInstance();
@@ -24,12 +23,12 @@ public class BankTest {
 
 
     @Test
-    public void CreateBankTest() {
+    public void createBankTest() {
         Assert.assertEquals("meme", bank.getName());
     }
 
     @Test
-    public void ReplenishmentTest() {
+    public void replenishmentTest() {
         Person person = new Person("Name", "Surname", "Address", 1000000000);
         bank.createDebitAccount(person, 10000);
         bank.replenishment(person.getAccounts().get(0), 5000);
@@ -37,7 +36,7 @@ public class BankTest {
     }
 
     @Test
-    public void WithdrawTest() {
+    public void withdrawTest() {
         Person person = new Person("Name", "Surname", "Address", 1000000000);
         bank.createDebitAccount(person, 10000);
         bank.withdraw(person.getAccounts().get(0), 5000);
