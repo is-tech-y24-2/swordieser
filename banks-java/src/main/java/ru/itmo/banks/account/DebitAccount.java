@@ -6,11 +6,11 @@ import ru.itmo.banks.transaction.Transaction;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class DebitAccount extends BaseAccount{
+public class DebitAccount extends BaseAccount {
     public DebitAccount(
             long id,
             BankConditions conditions,
-            double startBalance){
+            double startBalance) {
         this.id = id;
         this.percent = conditions.percent;
         this.maxTransfer = conditions.maxTransfer;

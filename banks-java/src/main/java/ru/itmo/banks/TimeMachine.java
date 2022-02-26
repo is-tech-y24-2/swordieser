@@ -5,7 +5,7 @@ import ru.itmo.banks.bank.CentralBank;
 import java.time.LocalDate;
 
 public class TimeMachine {
-    public static void TimeRewind(CentralBank centralBank, LocalDate dateTime) {
-        centralBank.NotifyBanks(dateTime);
+    public static void timeRewind(CentralBank centralBank, LocalDate dateTime) {
+        centralBank.notifyBanks(dateTime);
     }
 }

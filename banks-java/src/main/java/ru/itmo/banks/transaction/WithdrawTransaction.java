@@ -29,16 +29,16 @@ public class WithdrawTransaction extends Transaction {
         this.amount = amount;
         this.id = id;
         this.recipient = null;
-        sender.Withdraw(amount);
+        sender.withdraw(amount);
     }
 
     @Override
-    public void Cancel() {
+    public void cancel() {
         if (isCanceled) {
             throw new AlreadyCanceledTransactionException();
         }
 
-        this.sender.Replenishment(this.amount);
+        this.sender.replenishment(this.amount);
         isCanceled = true;
     }
 }

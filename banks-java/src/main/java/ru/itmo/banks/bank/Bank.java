@@ -5,7 +5,9 @@ import ru.itmo.banks.account.CreditAccount;
 import ru.itmo.banks.account.DebitAccount;
 import ru.itmo.banks.account.DepositAccount;
 import ru.itmo.banks.client.Person;
-import ru.itmo.banks.exception.*;
+import ru.itmo.banks.exception.AlreadyRegisteredObserverException;
+import ru.itmo.banks.exception.NotEndedDepositAccountException;
+import ru.itmo.banks.exception.NotRegisteredObserverException;
 import ru.itmo.banks.message.*;
 import ru.itmo.banks.transaction.*;
 
@@ -43,7 +45,7 @@ public class Bank {
     }
 
 
-    public void RegisterObserver(BaseAccount observer) {
+    public void registerObserver(BaseAccount observer) {
         if (observers.contains(observer)) {
             throw new AlreadyRegisteredObserverException();
         }
@@ -51,7 +53,7 @@ public class Bank {
         this.observers.add(observer);
     }
 
-    public void RemoveObserver(BaseAccount observer) {
+    public void removeObserver(BaseAccount observer) {
         if (!observers.contains(observer)) {
             throw new NotRegisteredObserverException();
         }
@@ -59,26 +61,26 @@ public class Bank {
         this.observers.remove(observer);
     }
 
-    public void SendNotify(List<BaseAccount> observers, double amount, BankMessage message) {
+    public void sendNotify(List<BaseAccount> observers, double amount, BankMessage message) {
         for (BaseAccount observer : observers) {
-            observer.Update(message.Message(amount));
+            observer.update(message.message(amount));
         }
     }
 
-    public BaseAccount CreateDebitAccount(Person person, double startBalance) {
+    public BaseAccount createDebitAccount(Person person, double startBalance) {
         var account = new DebitAccount(
                 accountsCounter++,
                 conditions,
                 startBalance);
 
         this.accounts.add(account);
-        person.AddNewAccount(account);
-        person.CheckDoubtfulness();
+        person.addNewAccount(account);
+        person.checkDoubtfulness();
 
         return account;
     }
 
-    public BaseAccount CreateDepositAccount(Person person, double startBalance, LocalDate end) {
+    public BaseAccount createDepositAccount(Person person, double startBalance, LocalDate end) {
         var account = new DepositAccount(
                 accountsCounter++,
                 conditions,
@@ -86,26 +88,26 @@ public class Bank {
                 end);
 
         this.accounts.add(account);
-        person.AddNewAccount(account);
-        person.CheckDoubtfulness();
+        person.addNewAccount(account);
+        person.checkDoubtfulness();
 
         return account;
     }
 
-    public BaseAccount CreateCreditAccount(Person person, double startBalance) {
+    public BaseAccount createCreditAccount(Person person, double startBalance) {
         var account = new CreditAccount(
                 accountsCounter++,
                 conditions,
                 startBalance);
 
         this.accounts.add(account);
-        person.AddNewAccount(account);
-        person.CheckDoubtfulness();
+        person.addNewAccount(account);
+        person.checkDoubtfulness();
 
         return account;
     }
 
-    public void SetMaxTransfer(double amount) {
+    public void setMaxTransfer(double amount) {
         var tempObservers = new ArrayList<BaseAccount>();
         for (BaseAccount account : this.accounts) {
             if (account.getMaxTransfer() != 0) {
@@ -113,10 +115,10 @@ public class Bank {
             }
         }
         this.conditions.maxTransfer = amount;
-        SendNotify(tempObservers, amount, new TransferLimitBankMessage());
+        sendNotify(tempObservers, amount, new TransferLimitBankMessage());
     }
 
-    public void SetMaxWithdraw(double amount) {
+    public void setMaxWithdraw(double amount) {
         var tempObservers = new ArrayList<BaseAccount>();
         for (BaseAccount account : this.accounts) {
             if (account.getMaxWithdraw() != 0) {
@@ -124,66 +126,66 @@ public class Bank {
             }
         }
         this.conditions.maxWithdraw = amount;
-        SendNotify(tempObservers, amount, new WithdrawLimitBankMessage());
+        sendNotify(tempObservers, amount, new WithdrawLimitBankMessage());
     }
 
-    public void SetCreditLimit(double amount) {
+    public void setCreditLimit(double amount) {
         var tempObservers = new ArrayList<BaseAccount>();
         for (BaseAccount account : this.accounts) {
             if (account.getCreditLimit() != 0) {
                 tempObservers.add(account);
             }
         }
-        SendNotify(tempObservers, amount, new CreditLimitBankMessage());
+        sendNotify(tempObservers, amount, new CreditLimitBankMessage());
     }
 
-    public void SetPercent(double amount) {
+    public void setPercent(double amount) {
         var tempObservers = new ArrayList<BaseAccount>();
         for (BaseAccount account : this.accounts) {
             if (account.getPercent() != 0) {
                 tempObservers.add(account);
             }
         }
-        SendNotify(tempObservers, amount, new PercentBankMessage());
+        sendNotify(tempObservers, amount, new PercentBankMessage());
     }
 
-    public void Replenishment(BaseAccount account, double amount) {
+    public void replenishment(BaseAccount account, double amount) {
         var trans = new ReplenishmentTransaction(account, amount, account.getTransactionId());
-        account.AddTransaction(trans);
+        account.addTransaction(trans);
     }
 
-    public void Withdraw(BaseAccount account, double amount) {
+    public void withdraw(BaseAccount account, double amount) {
         if (account.getAccountPeriod() != LocalDate.MIN && account.getAccountPeriod().isBefore(LocalDate.now())) {
             throw new NotEndedDepositAccountException();
         }
 
         var trans = new WithdrawTransaction(account, amount, account.getTransactionId());
-        account.AddTransaction(trans);
+        account.addTransaction(trans);
     }
 
-    public void Transfer(BaseAccount sender, BaseAccount recipient, double amount) {
+    public void transfer(BaseAccount sender, BaseAccount recipient, double amount) {
         if (sender.getAccountPeriod() != LocalDate.MIN && sender.getAccountPeriod().isBefore(LocalDate.now())) {
             throw new NotEndedDepositAccountException();
         }
 
         var trans = new TransferTransaction(sender, recipient, amount, sender.getTransactionId());
-        sender.AddTransaction(trans);
-        recipient.AddTransaction(trans);
+        sender.addTransaction(trans);
+        recipient.addTransaction(trans);
     }
 
-    public void Cancellation(BaseAccount account, Transaction transaction) {
+    public void cancellation(BaseAccount account, Transaction transaction) {
         var trans = new CancelTransaction(transaction);
-        account.AddTransaction(trans);
+        account.addTransaction(trans);
     }
 
-    public void UpdateBalance(LocalDate dateTime) {
+    public void updateBalance(LocalDate dateTime) {
         var updatingAccounts = new ArrayList<BaseAccount>();
         for (BaseAccount account : this.accounts) {
             if (account.getAccountPeriod() != java.time.LocalDate.MIN) {
                 updatingAccounts.add(account);
             }
         }
-        updatingAccounts.forEach(account -> account.BalanceUpdate(dateTime));
+        updatingAccounts.forEach(account -> account.balanceUpdate(dateTime));
     }
 
     public Collection<BaseAccount> getAccounts() {

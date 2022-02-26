@@ -13,7 +13,7 @@ public class DepositAccount extends BaseAccount {
             double startBalance,
             LocalDate endOfAccount) {
         this.id = id;
-        this.percent = conditions.ChooseDepositPercent(startBalance);
+        this.percent = conditions.chooseDepositPercent(startBalance);
         this.maxTransfer = conditions.maxTransfer;
         this.maxWithdraw = conditions.maxWithdraw;
         this.balance = startBalance;

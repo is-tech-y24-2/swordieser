@@ -21,34 +21,34 @@ public class Person {
         this.surname = surname;
         this.address = address;
         this.passport = passport;
-        CheckDoubtfulness();
+        checkDoubtfulness();
     }
 
 
-    public void AddNewAccount(BaseAccount account) {
+    public void addNewAccount(BaseAccount account) {
         accounts.add(account);
     }
 
-    public List<BaseAccount> GetAccounts() {
+    public List<BaseAccount> getAccounts() {
         return Collections.unmodifiableList(accounts);
     }
 
-    public void SetAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
-        CheckDoubtfulness();
+        checkDoubtfulness();
     }
 
-    public void SetPassport(long passport) {
+    public void setPassport(long passport) {
         this.passport = passport;
-        CheckDoubtfulness();
+        checkDoubtfulness();
     }
 
-    public void CheckDoubtfulness() {
+    public void checkDoubtfulness() {
         if (!this.address.isEmpty() && this.passport != 0) {
             this.doubtful = false;
             for (BaseAccount account : accounts) {
-                account.SetMaxWithdraw(0);
-                account.SetMaxTransfer(0);
+                account.setMaxWithdraw(0);
+                account.setMaxTransfer(0);
             }
         }
     }

@@ -3,6 +3,13 @@ package ru.itmo.banks.bank;
 import java.util.Map;
 
 public class BankConditions {
+    private final Map<Double, Double> percentBorders;
+    public double percent;
+    public double commission;
+    public double creditLimit;
+    public double maxTransfer;
+    public double maxWithdraw;
+
     public BankConditions(
             double percent,
             double commission,
@@ -18,15 +25,7 @@ public class BankConditions {
         this.percentBorders = percentsBorders;
     }
 
-    public double percent;
-    public double commission;
-    public double creditLimit;
-    public double maxTransfer;
-    public double maxWithdraw;
-    private final Map<Double, Double> percentBorders;
-
-
-    public double ChooseDepositPercent(double balance) {
+    public double chooseDepositPercent(double balance) {
         Map.Entry<Double, Double> entry = null;
         for (Map.Entry<Double, Double> ent : percentBorders.entrySet()) {
             entry = ent;

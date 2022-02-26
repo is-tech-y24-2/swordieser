@@ -54,8 +54,16 @@ public abstract class BaseAccount {
         return maxWithdraw;
     }
 
+    public void setMaxWithdraw(double amount) {
+        maxWithdraw = amount;
+    }
+
     public double getMaxTransfer() {
         return maxTransfer;
+    }
+
+    public void setMaxTransfer(double amount) {
+        maxTransfer = amount;
     }
 
     public List<String> getMessagesList() {
@@ -70,24 +78,24 @@ public abstract class BaseAccount {
         return accountPeriod;
     }
 
-    public void Replenishment(double amount) {
+    public void replenishment(double amount) {
         balance += amount;
     }
 
-    public void Withdraw(double amount) {
+    public void withdraw(double amount) {
         balance -= amount;
     }
 
-    public void Update(String message) {
+    public void update(String message) {
         messagesList.add(message);
     }
 
-    public void AddTransaction(Transaction t) {
+    public void addTransaction(Transaction t) {
         transactionsHistory.add(t);
         this.transactionId++;
     }
 
-    public void BalanceUpdate(LocalDate dateTime) {
+    public void balanceUpdate(LocalDate dateTime) {
         LocalDate date = LocalDate.now();
         double daysUntilEnd = dateTime.until(date).getDays();
 
@@ -97,7 +105,7 @@ public abstract class BaseAccount {
                 date = date.plusDays(1);
 
                 if (date.getDayOfMonth() == 1) {
-                    Withdraw(this.monthlyCommission);
+                    withdraw(this.monthlyCommission);
                     this.monthlyCommission = 0;
                 }
             }
@@ -108,23 +116,15 @@ public abstract class BaseAccount {
                         * Double.parseDouble(String.format("%.2f", this.percent / daysInYear).replace(",", "."));
                 date = date.plusDays(1);
                 if (date.getDayOfMonth() == 1) {
-                    Replenishment(this.monthlyPercentage);
+                    replenishment(this.monthlyPercentage);
                     this.monthlyPercentage = 0;
                 }
             }
         }
     }
 
-    public List<Transaction> GetTransactionsHistory(){
+    public List<Transaction> getTransactionsHistory() {
         return Collections.unmodifiableList(transactionsHistory);
-    }
-
-    public void SetMaxWithdraw(double amount) {
-        maxWithdraw = amount;
-    }
-
-    public void SetMaxTransfer(double amount) {
-        maxTransfer = amount;
     }
 
 

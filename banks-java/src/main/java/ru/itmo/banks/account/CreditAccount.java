@@ -23,7 +23,7 @@ public class CreditAccount extends BaseAccount {
     }
 
     @Override
-    public void BalanceUpdate(LocalDate dateTime) {
+    public void balanceUpdate(LocalDate dateTime) {
         LocalDate date = LocalDate.now();
         double daysUntilEnd = dateTime.until(date).getDays();
 
@@ -33,7 +33,7 @@ public class CreditAccount extends BaseAccount {
                 date = date.plusDays(1);
 
                 if (date.getDayOfMonth() == 1) {
-                    Withdraw(this.monthlyCommission);
+                    withdraw(this.monthlyCommission);
                     this.monthlyCommission = 0;
                 }
             }

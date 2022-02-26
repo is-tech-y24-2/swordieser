@@ -13,15 +13,15 @@ public class ReplenishmentTransaction extends Transaction {
         this.amount = amount;
         this.id = id;
         this.sender = null;
-        recipient.Replenishment(amount);
+        recipient.replenishment(amount);
     }
 
     @Override
-    public void Cancel() throws AlreadyCanceledTransactionException {
+    public void cancel() {
         if (isCanceled) {
             throw new AlreadyCanceledTransactionException();
         }
-        this.recipient.Withdraw(amount);
+        this.recipient.withdraw(amount);
         isCanceled = true;
     }
 }

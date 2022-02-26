@@ -1,7 +1,6 @@
 package ru.itmo.banks.transaction;
 
 import ru.itmo.banks.account.BaseAccount;
-import ru.itmo.banks.exception.AlreadyCanceledTransactionException;
 
 public abstract class Transaction {
     protected BaseAccount sender;
@@ -10,7 +9,7 @@ public abstract class Transaction {
     protected int id;
     protected boolean isCanceled;
 
-    public abstract void Cancel();
+    public abstract void cancel();
 
     public BaseAccount getSender() {
         return sender;

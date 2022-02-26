@@ -1,13 +1,11 @@
 package ru.itmo.banks.transaction;
 
-import ru.itmo.banks.exception.AlreadyCanceledTransactionException;
-
 public class CancelTransaction extends Transaction {
-    public CancelTransaction(Transaction transaction) throws AlreadyCanceledTransactionException {
-        transaction.Cancel();
+    public CancelTransaction(Transaction transaction) {
+        transaction.cancel();
     }
 
     @Override
-    public void Cancel() {
+    public void cancel() {
     }
 }

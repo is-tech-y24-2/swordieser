@@ -14,21 +14,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static String interfaceType;
     private static final CentralBank centralBank = CentralBank.getInstance();
     private static final List<Person> clients = new ArrayList<>();
+    private static String interfaceType;
 
     public static void main(String[] args) throws InvalidTransactionAmountException, WithdrawException, NotEndedDepositAccountException, ReplenishmentException, AlreadyCanceledTransactionException {
-        ChooseInterfaceType();
+        chooseInterfaceType();
     }
 
-    static void ChooseInterfaceType() throws NotEndedDepositAccountException, WithdrawException, InvalidTransactionAmountException, ReplenishmentException, AlreadyCanceledTransactionException {
+    static void chooseInterfaceType() throws NotEndedDepositAccountException, WithdrawException, InvalidTransactionAmountException, ReplenishmentException, AlreadyCanceledTransactionException {
         System.out.println("Choose your fighter\n1.manager\n2.client\n3.stop");
         interfaceType = new Scanner(System.in).nextLine();
-        InterfaceType();
+        interfaceType();
     }
 
-    static void Manager() {
+    static void manager() {
         while (true) {
             System.out.println("You can choose:" +
                     "\n1. Create bank" +
@@ -62,7 +62,7 @@ public class Main {
                         borders.put(depositPercent, upperBound);
                     }
 
-                    centralBank.CreateBank(
+                    centralBank.createBank(
                             name,
                             percent,
                             commission,
@@ -73,7 +73,7 @@ public class Main {
                     break;
                 case "2":
                 case "Get list of banks":
-                    for (Bank bank : centralBank.GetBanks()) {
+                    for (Bank bank : centralBank.getBanks()) {
                         System.out.printf("%d - %s\n", bank.getId(), bank.getName());
                     }
 
@@ -85,11 +85,11 @@ public class Main {
                             Integer.parseInt(scan.nextLine()),
                             Integer.parseInt(scan.nextLine()),
                             Integer.parseInt(scan.nextLine()));
-                    TimeMachine.TimeRewind(centralBank, date);
+                    TimeMachine.timeRewind(centralBank, date);
                     break;
                 case "4":
                 case "Go to main menu":
-                    ChooseInterfaceType();
+                    chooseInterfaceType();
                     break;
                 default:
                     System.out.println("Try again");
@@ -97,7 +97,7 @@ public class Main {
         }
     }
 
-    static void Client() {
+    static void client() {
         while (true) {
             System.out.println("You can choose:" +
                     "\n1. Register" +
@@ -123,18 +123,18 @@ public class Main {
                     System.out.println("Type your passport to end verification");
                     long passport = Integer.parseInt(scan.nextLine());
                     var person = new Person(personName, personSurname, personAddress, passport);
-                    person.CheckDoubtfulness();
+                    person.checkDoubtfulness();
                     clients.add(person);
                     break;
                 case "2":
                 case "Create account":
                     System.out.println("Choose the bank by number:");
-                    for (Bank bank : centralBank.GetBanks()) {
+                    for (Bank bank : centralBank.getBanks()) {
                         System.out.printf("%d - %s\n", bank.getId(), bank.getName());
                     }
 
                     int bankId = Integer.parseInt(scan.nextLine());
-                    for (Bank bank : centralBank.GetBanks()) {
+                    for (Bank bank : centralBank.getBanks()) {
                         if (bank.getId() == bankId) {
                             System.out.println("Type your full name");
                             String name = scan.nextLine();
@@ -149,10 +149,10 @@ public class Main {
                                 String type = scan.nextLine();
                                 switch (type) {
                                     case "Debit":
-                                        bank.CreateDebitAccount(client, 0);
+                                        bank.createDebitAccount(client, 0);
                                         break;
                                     case "Credit":
-                                        bank.CreateCreditAccount(client, 0);
+                                        bank.createCreditAccount(client, 0);
                                         break;
                                     case "Deposit":
                                         System.out.println("Type amount of deposit");
@@ -161,7 +161,7 @@ public class Main {
                                         int year = Integer.parseInt(scan.nextLine());
                                         int month = Integer.parseInt(scan.nextLine());
                                         int day = Integer.parseInt(scan.nextLine());
-                                        bank.CreateDepositAccount(
+                                        bank.createDepositAccount(
                                                 client,
                                                 deposit,
                                                 LocalDate.of(year, month, day));
@@ -183,7 +183,7 @@ public class Main {
                         }
                     }
                     for (Person client : tempClients) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             System.out.printf("%d:\nBalance: %f", account.getId(), account.getBalance());
                         }
                     }
@@ -201,7 +201,7 @@ public class Main {
                     }
                     int accId = Integer.parseInt(scan.nextLine());
                     for (Person client : tempClients1) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             if (account.getId() == accId) {
                                 System.out.printf("Balance: %f", account.getBalance());
                             }
@@ -221,13 +221,13 @@ public class Main {
                         }
                     }
                     for (Person client : tempClients2) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             if (account.getId() == withId) {
-                                for (Bank bank : centralBank.GetBanks()) {
+                                for (Bank bank : centralBank.getBanks()) {
                                     if (bank.getAccounts().contains(account)) {
                                         System.out.println("Type amount of withdraw");
                                         int withdraw = Integer.parseInt(scan.nextLine());
-                                        bank.Withdraw(account, withdraw);
+                                        bank.withdraw(account, withdraw);
                                         break;
                                     }
                                 }
@@ -248,13 +248,13 @@ public class Main {
                         }
                     }
                     for (Person client : tempClients3) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             if (account.getId() == repId) {
-                                for (Bank bank : centralBank.GetBanks()) {
+                                for (Bank bank : centralBank.getBanks()) {
                                     if (bank.getAccounts().contains(account)) {
                                         System.out.println("Type amount of withdraw");
                                         int replenishment = Integer.parseInt(scan.nextLine());
-                                        bank.Replenishment(account, replenishment);
+                                        bank.replenishment(account, replenishment);
                                         break;
                                     }
                                 }
@@ -275,7 +275,7 @@ public class Main {
                         }
                     }
                     for (Person client : tempClients4) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             if (account.getId() == transferId) {
                                 System.out.println("Type full name and account id of the recipient");
                                 String recipName = scan.nextLine();
@@ -287,13 +287,13 @@ public class Main {
                                     }
                                 }
                                 for (Person client1 : tempClients5) {
-                                    for (BaseAccount account1 : client1.GetAccounts()) {
+                                    for (BaseAccount account1 : client1.getAccounts()) {
                                         if (account1.getId() == recipId) {
-                                            for (Bank bank : centralBank.GetBanks()) {
+                                            for (Bank bank : centralBank.getBanks()) {
                                                 if (bank.getAccounts().contains(account)) {
                                                     System.out.println("Type the amount of transfer");
                                                     double amount = Double.parseDouble(scan.nextLine());
-                                                    bank.Transfer(account, account1, amount);
+                                                    bank.transfer(account, account1, amount);
                                                     break;
                                                 }
                                             }
@@ -317,9 +317,9 @@ public class Main {
                         }
                     }
                     for (Person client : tempClients6) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             if (account.getId() == transId) {
-                                for (Transaction transaction : account.GetTransactionsHistory()) {
+                                for (Transaction transaction : account.getTransactionsHistory()) {
                                     System.out.printf("Transaction id: %d", transaction.getId());
                                     if (transaction.getSender() != null) {
                                         System.out.printf("Transaction sender: %d", transaction.getSender().getId());
@@ -348,15 +348,15 @@ public class Main {
                         }
                     }
                     for (Person client : tempClients7) {
-                        for (BaseAccount account : client.GetAccounts()) {
+                        for (BaseAccount account : client.getAccounts()) {
                             if (account.getId() == cancelId) {
                                 System.out.println("Type the id of the transaction");
                                 int transCancelId = Integer.parseInt(scan.nextLine());
-                                for (Transaction transaction : account.GetTransactionsHistory()) {
+                                for (Transaction transaction : account.getTransactionsHistory()) {
                                     if (transaction.getId() == transCancelId) {
-                                        for (Bank bank : centralBank.GetBanks()) {
+                                        for (Bank bank : centralBank.getBanks()) {
                                             if (bank.getAccounts().contains(account)) {
-                                                bank.Cancellation(account, transaction);
+                                                bank.cancellation(account, transaction);
                                                 break;
                                             }
                                         }
@@ -369,7 +369,7 @@ public class Main {
                     break;
                 case "10":
                 case "Go to main menu":
-                    ChooseInterfaceType();
+                    chooseInterfaceType();
                     break;
                 default:
                     System.out.println("Try again");
@@ -377,22 +377,22 @@ public class Main {
         }
     }
 
-    static void InterfaceType() {
+    static void interfaceType() {
         switch (interfaceType) {
             case "1":
             case "manager":
-                Manager();
+                manager();
                 break;
             case "2":
             case "client":
-                Client();
+                client();
                 break;
             case "3":
             case "stop":
                 return;
             default:
                 System.out.println("Try again");
-                ChooseInterfaceType();
+                chooseInterfaceType();
                 break;
         }
     }

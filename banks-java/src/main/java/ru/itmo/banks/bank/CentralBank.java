@@ -23,7 +23,7 @@ public class CentralBank {
         return instance;
     }
 
-    public Bank CreateBank(
+    public Bank createBank(
             String name,
             double percent,
             double commission,
@@ -36,13 +36,13 @@ public class CentralBank {
         return bank;
     }
 
-    public List<Bank> GetBanks() {
+    public List<Bank> getBanks() {
         return Collections.unmodifiableList(banks);
     }
 
-    public void NotifyBanks(LocalDate dateTime) {
+    public void notifyBanks(LocalDate dateTime) {
         for (Bank bank : banks) {
-            bank.UpdateBalance(dateTime);
+            bank.updateBalance(dateTime);
         }
     }
 }

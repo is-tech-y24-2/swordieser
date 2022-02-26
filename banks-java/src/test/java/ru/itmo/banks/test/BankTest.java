@@ -1,18 +1,17 @@
 package ru.itmo.banks.test;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 import ru.itmo.banks.bank.Bank;
 import ru.itmo.banks.bank.CentralBank;
-import org.junit.jupiter.api.Test;
 import ru.itmo.banks.client.Person;
 
-import java.util.HashMap;
 import java.util.Map;
 //import org.testng.Assert;
 
 public class BankTest {
     private CentralBank centralBank = CentralBank.getInstance();
-    private Bank bank = centralBank.CreateBank("meme",
+    private Bank bank = centralBank.createBank("meme",
             0.15,
             0.1,
             0.1,
@@ -25,24 +24,24 @@ public class BankTest {
 
 
     @Test
-    public void CreateBankTest(){
+    public void CreateBankTest() {
         Assert.assertEquals("meme", bank.getName());
     }
 
     @Test
-    public void ReplenishmentTest(){
+    public void ReplenishmentTest() {
         Person person = new Person("Name", "Surname", "Address", 1000000000);
-        bank.CreateDebitAccount(person, 10000);
-        bank.Replenishment(person.GetAccounts().get(0), 5000);
-        Assert.assertEquals(15000.0, person.GetAccounts().get(0).getBalance(), 10);
+        bank.createDebitAccount(person, 10000);
+        bank.replenishment(person.getAccounts().get(0), 5000);
+        Assert.assertEquals(15000.0, person.getAccounts().get(0).getBalance(), 10);
     }
 
     @Test
-    public void WithdrawTest(){
+    public void WithdrawTest() {
         Person person = new Person("Name", "Surname", "Address", 1000000000);
-        bank.CreateDebitAccount(person, 10000);
-        bank.Withdraw(person.GetAccounts().get(0), 5000);
-        Assert.assertEquals(5000.0, person.GetAccounts().get(0).getBalance(), 10);
+        bank.createDebitAccount(person, 10000);
+        bank.withdraw(person.getAccounts().get(0), 5000);
+        Assert.assertEquals(5000.0, person.getAccounts().get(0).getBalance(), 10);
     }
 
 }

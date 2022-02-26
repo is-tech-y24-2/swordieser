@@ -26,19 +26,18 @@ public class TransferTransaction extends Transaction {
                             sender.getBalance(), sender.getCreditLimit()));
         }
 
-        sender.Withdraw(amount);
-        recipient.Replenishment(amount);
+        sender.withdraw(amount);
+        recipient.replenishment(amount);
     }
 
     @Override
-    public void Cancel() {
-        if (isCanceled)
-        {
+    public void cancel() {
+        if (isCanceled) {
             throw new AlreadyCanceledTransactionException();
         }
 
-        this.sender.Replenishment(this.amount);
-        this.recipient.Withdraw(this.amount);
+        this.sender.replenishment(this.amount);
+        this.recipient.withdraw(this.amount);
         this.isCanceled = true;
     }
 }
