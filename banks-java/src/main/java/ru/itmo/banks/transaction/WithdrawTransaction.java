@@ -33,7 +33,7 @@ public class WithdrawTransaction extends Transaction {
     }
 
     @Override
-    public void Cancel() throws AlreadyCanceledTransactionException {
+    public void Cancel() {
         if (isCanceled) {
             throw new AlreadyCanceledTransactionException();
         }

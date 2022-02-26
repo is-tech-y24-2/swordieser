@@ -1,4 +1,4 @@
 package ru.itmo.banks.exception;
 
-public class MaxReplenishmentException extends Exception {
+public class MaxReplenishmentException extends RuntimeException {
 }

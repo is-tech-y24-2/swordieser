@@ -1,4 +1,4 @@
 package ru.itmo.banks.exception;
 
-public class NotRegisteredObserverException extends Exception {
+public class NotRegisteredObserverException extends RuntimeException {
 }

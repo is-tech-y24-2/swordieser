@@ -1,4 +1,4 @@
 package ru.itmo.banks.exception;
 
-public class AlreadyCanceledTransactionException extends Exception {
+public class AlreadyCanceledTransactionException extends RuntimeException {
 }

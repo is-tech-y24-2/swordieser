@@ -5,7 +5,7 @@ import ru.itmo.banks.exception.AlreadyCanceledTransactionException;
 import ru.itmo.banks.exception.InvalidTransactionAmountException;
 
 public class ReplenishmentTransaction extends Transaction {
-    public ReplenishmentTransaction(BaseAccount recipient, double amount, int id) throws InvalidTransactionAmountException {
+    public ReplenishmentTransaction(BaseAccount recipient, double amount, int id) {
         if (amount <= 0) {
             throw new InvalidTransactionAmountException();
         }

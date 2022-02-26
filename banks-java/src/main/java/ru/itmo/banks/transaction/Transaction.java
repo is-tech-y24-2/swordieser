@@ -10,7 +10,7 @@ public abstract class Transaction {
     protected int id;
     protected boolean isCanceled;
 
-    public abstract void Cancel() throws AlreadyCanceledTransactionException;
+    public abstract void Cancel();
 
     public BaseAccount getSender() {
         return sender;

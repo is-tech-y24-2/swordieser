@@ -43,7 +43,7 @@ public class Bank {
     }
 
 
-    public void RegisterObserver(BaseAccount observer) throws AlreadyRegisteredObserverException {
+    public void RegisterObserver(BaseAccount observer) {
         if (observers.contains(observer)) {
             throw new AlreadyRegisteredObserverException();
         }
@@ -51,7 +51,7 @@ public class Bank {
         this.observers.add(observer);
     }
 
-    public void RemoveObserver(BaseAccount observer) throws NotRegisteredObserverException {
+    public void RemoveObserver(BaseAccount observer) {
         if (!observers.contains(observer)) {
             throw new NotRegisteredObserverException();
         }
@@ -147,12 +147,12 @@ public class Bank {
         SendNotify(tempObservers, amount, new PercentBankMessage());
     }
 
-    public void Replenishment(BaseAccount account, double amount) throws InvalidTransactionAmountException {
+    public void Replenishment(BaseAccount account, double amount) {
         var trans = new ReplenishmentTransaction(account, amount, account.getTransactionId());
         account.AddTransaction(trans);
     }
 
-    public void Withdraw(BaseAccount account, double amount) throws NotEndedDepositAccountException, WithdrawException, InvalidTransactionAmountException {
+    public void Withdraw(BaseAccount account, double amount) {
         if (account.getAccountPeriod() != LocalDate.MIN && account.getAccountPeriod().isBefore(LocalDate.now())) {
             throw new NotEndedDepositAccountException();
         }
@@ -161,7 +161,7 @@ public class Bank {
         account.AddTransaction(trans);
     }
 
-    public void Transfer(BaseAccount sender, BaseAccount recipient, double amount) throws NotEndedDepositAccountException, ReplenishmentException, InvalidTransactionAmountException {
+    public void Transfer(BaseAccount sender, BaseAccount recipient, double amount) {
         if (sender.getAccountPeriod() != LocalDate.MIN && sender.getAccountPeriod().isBefore(LocalDate.now())) {
             throw new NotEndedDepositAccountException();
         }
@@ -171,7 +171,7 @@ public class Bank {
         recipient.AddTransaction(trans);
     }
 
-    public void Cancellation(BaseAccount account, Transaction transaction) throws AlreadyCanceledTransactionException {
+    public void Cancellation(BaseAccount account, Transaction transaction) {
         var trans = new CancelTransaction(transaction);
         account.AddTransaction(trans);
     }

@@ -1,4 +1,4 @@
 package ru.itmo.banks.exception;
 
-public class InvalidTransactionAmountException extends Exception {
+public class InvalidTransactionAmountException extends RuntimeException {
 }

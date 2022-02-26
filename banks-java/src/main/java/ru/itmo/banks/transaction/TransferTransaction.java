@@ -6,7 +6,7 @@ import ru.itmo.banks.exception.InvalidTransactionAmountException;
 import ru.itmo.banks.exception.ReplenishmentException;
 
 public class TransferTransaction extends Transaction {
-    public TransferTransaction(BaseAccount sender, BaseAccount recipient, double amount, int id) throws InvalidTransactionAmountException, ReplenishmentException {
+    public TransferTransaction(BaseAccount sender, BaseAccount recipient, double amount, int id) {
         this.recipient = recipient;
         this.sender = sender;
         this.amount = amount;
@@ -31,7 +31,7 @@ public class TransferTransaction extends Transaction {
     }
 
     @Override
-    public void Cancel() throws AlreadyCanceledTransactionException {
+    public void Cancel() {
         if (isCanceled)
         {
             throw new AlreadyCanceledTransactionException();

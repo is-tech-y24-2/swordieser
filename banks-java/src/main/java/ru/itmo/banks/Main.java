@@ -28,7 +28,7 @@ public class Main {
         InterfaceType();
     }
 
-    static void Manager() throws InvalidTransactionAmountException, WithdrawException, NotEndedDepositAccountException, ReplenishmentException, AlreadyCanceledTransactionException {
+    static void Manager() {
         while (true) {
             System.out.println("You can choose:" +
                     "\n1. Create bank" +
@@ -97,7 +97,7 @@ public class Main {
         }
     }
 
-    static void Client() throws InvalidTransactionAmountException, WithdrawException, NotEndedDepositAccountException, ReplenishmentException, AlreadyCanceledTransactionException {
+    static void Client() {
         while (true) {
             System.out.println("You can choose:" +
                     "\n1. Register" +
@@ -377,7 +377,7 @@ public class Main {
         }
     }
 
-    static void InterfaceType() throws WithdrawException, InvalidTransactionAmountException, NotEndedDepositAccountException, ReplenishmentException, AlreadyCanceledTransactionException {
+    static void InterfaceType() {
         switch (interfaceType) {
             case "1":
             case "manager":
