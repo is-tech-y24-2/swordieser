@@ -14,9 +14,9 @@ public class Program {
     public static void main(String[] args) {
         OwnerService userService = new OwnerService();
         Owner user = new Owner("owner", Date.valueOf(LocalDate.of(2000, 1, 1)));
-        userService.saveUser(user);
+        userService.saveOwner(user);
         Cat cat = new Cat("cat", Date.valueOf(LocalDate.of(2002, 1, 1)), CatBreed.Persian, CatColor.White);
         user.addCat(cat);
-        userService.updateUser(user);
+        userService.updateOwner(user);
     }
 }

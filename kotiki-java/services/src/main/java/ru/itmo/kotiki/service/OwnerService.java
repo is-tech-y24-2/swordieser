@@ -11,23 +11,23 @@ public class OwnerService {
 
     public OwnerService(){}
 
-    public Owner findUser(int id) {
+    public Owner findOwner(int id) {
         return ownerDao.findById(id);
     }
 
-    public void saveUser(Owner user) {
-        ownerDao.save(user);
+    public void saveOwner(Owner owner) {
+        ownerDao.save(owner);
     }
 
-    public void deleteUser(Owner user) {
-        ownerDao.delete(user);
+    public void deleteOwner(Owner owner) {
+        ownerDao.delete(owner);
     }
 
-    public void updateUser(Owner user) {
-        ownerDao.update(user);
+    public void updateOwner(Owner owner) {
+        ownerDao.update(owner);
     }
 
-    public List<Owner> findAllUsers() {
+    public List<Owner> findAllOwners() {
         return ownerDao.findAll();
     }
 
