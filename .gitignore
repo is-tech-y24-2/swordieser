@@ -8,3 +8,5 @@
 /httpRequests/
 /.idea
 /out
+kotiki-java/DAO/target
+kotiki-java/services/target
