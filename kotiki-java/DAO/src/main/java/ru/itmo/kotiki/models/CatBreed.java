@@ -1,5 +1,5 @@
 package ru.itmo.kotiki.models;
 
 public enum CatBreed {
-    MaineCoon, Persian, Sphinx
+    MAINE_COON, PERSIAN, SPHINX
 }
