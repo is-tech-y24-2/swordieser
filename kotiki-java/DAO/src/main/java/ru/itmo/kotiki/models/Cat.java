@@ -17,8 +17,10 @@ public class Cat {
     @Column(name = "Birthday")
     private final Date birthday;
     @Column(name = "Breed")
+    @Enumerated(EnumType.STRING)
     private final CatBreed breed;
     @Column(name = "Color")
+    @Enumerated(EnumType.STRING)
     private final CatColor color;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Owner_id")
