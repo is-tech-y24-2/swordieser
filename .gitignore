@@ -10,3 +10,6 @@
 /out
 kotiki-java/DAO/target
 kotiki-java/services/target
+kotiki-java/target
+/lib
+*.iml
