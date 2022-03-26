@@ -4,6 +4,7 @@ import ru.itmo.kotiki.dao.implementation.OwnerDaoImpl;
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.models.Owner;
 
+
 import java.util.List;
 
 public class OwnerService {
@@ -31,7 +32,7 @@ public class OwnerService {
         return ownerDao.findAll();
     }
 
-    public Cat findAutoById(int id) {
+    public Cat findCatById(int id) {
         return ownerDao.findCatById(id);
     }
 }
