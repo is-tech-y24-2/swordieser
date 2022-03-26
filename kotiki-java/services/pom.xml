@@ -15,10 +15,6 @@
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <postgresql.version>42.3.3</postgresql.version>
-        <hibernate.version>5.0.1.Final</hibernate.version>
-        <jaxb-api.version>2.3.0</jaxb-api.version>
-        <jaxb-runtime.version>2.3.2</jaxb-runtime.version>
     </properties>
 
     <build>
