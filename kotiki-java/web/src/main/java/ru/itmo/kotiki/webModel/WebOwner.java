@@ -6,8 +6,11 @@ import ru.itmo.kotiki.models.Owner;
 import java.sql.Date;
 
 public class WebOwner {
-    private final String name;
-    private final Date birthday;
+    private String name;
+    private Date birthday;
+
+    public WebOwner(){
+    }
 
     public WebOwner(Owner owner){
         this.name = owner.getName();;

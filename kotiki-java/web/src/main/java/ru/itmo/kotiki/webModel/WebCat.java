@@ -1,5 +1,6 @@
 package ru.itmo.kotiki.webModel;
 
+
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.models.CatBreed;
 import ru.itmo.kotiki.models.CatColor;
@@ -7,10 +8,13 @@ import ru.itmo.kotiki.models.CatColor;
 import java.sql.Date;
 
 public class WebCat {
-    private final String name;
-    private final Date birthday;
-    private final CatBreed breed;
-    private final CatColor color;
+    private String name;
+    private Date birthday;
+    private CatBreed breed;
+    private CatColor color;
+
+    public WebCat(){
+    }
 
     public WebCat(Cat cat){
         this.name = cat.getName();;
