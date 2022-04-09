@@ -13,27 +13,20 @@ public class Cat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
-    private final String name;
+    private String name;
     @Column(name = "birthday")
-    private final Date birthday;
+    private Date birthday;
     @Column(name = "breed")
     @Enumerated(EnumType.STRING)
-    private final CatBreed breed;
+    private CatBreed breed;
     @Column(name = "color")
     @Enumerated(EnumType.STRING)
-    private final CatColor color;
+    private CatColor color;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Owner owner;
-    @OneToMany(targetEntity = Cat.class)
-    private final List<Cat> friends;
 
     public Cat() {
-        this.name = null;
-        this.birthday = null;
-        this.breed = null;
-        this.color = null;
-        this.friends = null;
     }
 
     public Cat(String name, Date birthday, CatBreed breed, CatColor color) {
@@ -41,7 +34,6 @@ public class Cat {
         this.birthday = birthday;
         this.breed = breed;
         this.color = color;
-        this.friends = new ArrayList<>();
     }
 
 
@@ -69,19 +61,11 @@ public class Cat {
         return owner;
     }
 
-    public List<Cat> getFriends() {
-        return friends;
-    }
-
-    public void addFriend(Cat cat){
-        friends.add(cat);
-    }
-
-    public void deleteFriend(Cat cat){
-        friends.remove(cat);
-    }
-
     public void setOwner(Owner owner){
         this.owner = owner;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }

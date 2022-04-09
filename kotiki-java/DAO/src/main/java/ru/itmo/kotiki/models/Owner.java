@@ -12,16 +12,13 @@ public class Owner {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
-    private final String name;
+    private String name;
     @Column(name = "birthday")
-    private final Date birthday;
+    private Date birthday;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Cat> cats;
+    private List<Cat> cats;
 
     public Owner(){
-        this.name = null;
-        this.birthday = null;
-        this.cats = null;
     }
 
     public Owner(String name, Date birthday) {
@@ -53,5 +50,9 @@ public class Owner {
 
     public void deleteCat(Cat cat){
         cats.remove(cat);
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }
