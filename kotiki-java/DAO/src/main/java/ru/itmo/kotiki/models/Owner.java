@@ -6,17 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Owners")
+@Table(name = "owners")
 public class Owner {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private int id;
-    @Column(name = "Name")
+    @Column(name = "name")
     private final String name;
-    @Column(name = "Birthday")
+    @Column(name = "birthday")
     private final Date birthday;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Cat> cats;
+
+    public Owner(){
+        this.name = null;
+        this.birthday = null;
+        this.cats = null;
+    }
 
     public Owner(String name, Date birthday) {
         this.name = name;

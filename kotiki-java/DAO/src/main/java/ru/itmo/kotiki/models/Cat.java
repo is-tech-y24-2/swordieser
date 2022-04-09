@@ -7,26 +7,34 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "Cats")
+@Table(name = "cats")
 public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "Name")
+    @Column(name = "name")
     private final String name;
-    @Column(name = "Birthday")
+    @Column(name = "birthday")
     private final Date birthday;
-    @Column(name = "Breed")
+    @Column(name = "breed")
     @Enumerated(EnumType.STRING)
     private final CatBreed breed;
-    @Column(name = "Color")
+    @Column(name = "color")
     @Enumerated(EnumType.STRING)
     private final CatColor color;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Owner_id")
+    @JoinColumn(name = "owner_id")
     private Owner owner;
     @OneToMany(targetEntity = Cat.class)
     private final List<Cat> friends;
+
+    public Cat() {
+        this.name = null;
+        this.birthday = null;
+        this.breed = null;
+        this.color = null;
+        this.friends = null;
+    }
 
     public Cat(String name, Date birthday, CatBreed breed, CatColor color) {
         this.name = name;
@@ -35,6 +43,7 @@ public class Cat {
         this.color = color;
         this.friends = new ArrayList<>();
     }
+
 
     public int getId(){
         return id;
