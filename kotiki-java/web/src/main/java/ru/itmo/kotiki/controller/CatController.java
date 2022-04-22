@@ -3,46 +3,46 @@ package ru.itmo.kotiki.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.kotiki.models.Cat;
-import ru.itmo.kotiki.service.CatService;
+import ru.itmo.kotiki.service.implementation.CatServiceImpl;
 import ru.itmo.kotiki.webModel.Converter;
-import ru.itmo.kotiki.webModel.WebCat;
+import ru.itmo.kotiki.webModel.CatDto;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/cats")
 public class CatController {
-    private final CatService catService;
+    private final CatServiceImpl catServiceImpl;
 
     @Autowired
-    public CatController(CatService catService) {
-        this.catService = catService;
+    public CatController(CatServiceImpl catServiceImpl) {
+        this.catServiceImpl = catServiceImpl;
     }
 
     @PostMapping("/create")
-    public void createCat(@RequestBody WebCat webCat){
-        catService.saveCat(Converter.webCatToCat(webCat));
+    public void createCat(@RequestBody CatDto catDto){
+        catServiceImpl.saveCat(Converter.webCatToCat(catDto));
     }
 
-    @GetMapping("/findcat/{id}")
-    public WebCat findCatById(@PathVariable int id){
-        return Converter.catToWebCat(catService.findCat(id));
+    @GetMapping("/findCat/{id}")
+    public CatDto findCatById(@PathVariable int id){
+        return Converter.catToWebCat(catServiceImpl.findCat(id));
     }
 
-    @GetMapping("/getallcats")
-    public List<WebCat> getAllCats(){
-        return Converter.catsToWebCats(catService.findAllCats());
+    @GetMapping("/getAllCats")
+    public List<CatDto> getAllCats(){
+        return Converter.catsToWebCats(catServiceImpl.findAllCats());
     }
 
     @PutMapping("/update/{id}")
     public void updateCat(@PathVariable int id, String name){
-        Cat cat = catService.findCat(id);
+        Cat cat = catServiceImpl.findCat(id);
         cat.setName(name);
-        catService.saveCat(cat);
+        catServiceImpl.saveCat(cat);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteCatById(@PathVariable int id){
-        catService.deleteCat(catService.findCat(id));
+        catServiceImpl.deleteCat(catServiceImpl.findCat(id));
     }
 }

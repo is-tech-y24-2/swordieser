@@ -2,25 +2,24 @@ package ru.itmo.kotiki.webModel;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.models.CatBreed;
 import ru.itmo.kotiki.models.CatColor;
 
 import java.sql.Date;
 
-@Component
-public class WebCat {
+
+public class CatDto {
     private String name;
     private Date birthday;
     private CatBreed breed;
     private CatColor color;
 
     @Autowired
-    public WebCat(){
+    public CatDto(){
     }
 
-    public WebCat(Cat cat){
+    public CatDto(Cat cat){
         this.name = cat.getName();;
         this.birthday = cat.getBirthday();
         this.breed = cat.getBreed();
