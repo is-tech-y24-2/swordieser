@@ -13,3 +13,8 @@ kotiki-java/services/target
 kotiki-java/target
 /lib
 *.iml
+kotiki-java/web/mvnw*
+kotiki-java/web/.mvn
+
+kotiki-java/web/target
+kotiki-java/web/HELP.md

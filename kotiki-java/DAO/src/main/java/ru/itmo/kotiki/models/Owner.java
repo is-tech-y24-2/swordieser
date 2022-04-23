@@ -9,14 +9,17 @@ import java.util.List;
 @Table(name = "Owners")
 public class Owner {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Name")
-    private final String name;
+    private String name;
     @Column(name = "Birthday")
-    private final Date birthday;
+    private Date birthday;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Cat> cats;
+    private List<Cat> cats;
+
+    public Owner() {
+    }
 
     public Owner(String name, Date birthday) {
         this.name = name;
@@ -24,12 +27,16 @@ public class Owner {
         this.cats = new ArrayList<>();
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getBirthday() {
@@ -40,12 +47,12 @@ public class Owner {
         return cats;
     }
 
-    public void addCat(Cat cat){
+    public void addCat(Cat cat) {
         cat.setOwner(this);
         cats.add(cat);
     }
 
-    public void deleteCat(Cat cat){
+    public void deleteCat(Cat cat) {
         cats.remove(cat);
     }
 }

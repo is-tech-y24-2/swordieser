@@ -2,8 +2,6 @@ package ru.itmo.kotiki.models;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -13,35 +11,40 @@ public class Cat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Name")
-    private final String name;
+    private String name;
     @Column(name = "Birthday")
-    private final Date birthday;
+    private Date birthday;
     @Column(name = "Breed")
     @Enumerated(EnumType.STRING)
-    private final CatBreed breed;
+    private CatBreed breed;
     @Column(name = "Color")
     @Enumerated(EnumType.STRING)
-    private final CatColor color;
+    private CatColor color;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Owner_id")
     private Owner owner;
-    @OneToMany(targetEntity = Cat.class)
-    private final List<Cat> friends;
+
+    public Cat() {
+    }
 
     public Cat(String name, Date birthday, CatBreed breed, CatColor color) {
         this.name = name;
         this.birthday = birthday;
         this.breed = breed;
         this.color = color;
-        this.friends = new ArrayList<>();
     }
 
-    public int getId(){
+
+    public int getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getBirthday() {
@@ -60,19 +63,7 @@ public class Cat {
         return owner;
     }
 
-    public List<Cat> getFriends() {
-        return friends;
-    }
-
-    public void addFriend(Cat cat){
-        friends.add(cat);
-    }
-
-    public void deleteFriend(Cat cat){
-        friends.remove(cat);
-    }
-
-    public void setOwner(Owner owner){
+    public void setOwner(Owner owner) {
         this.owner = owner;
     }
 }
