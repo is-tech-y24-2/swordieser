@@ -41,15 +41,4 @@ public class KotikiTest {
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
         assertEquals(owner, ownerServiceImpl.findOwner(1));
     }
-
-    @Test
-    public void findCatByIdTest() {
-        Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"));
-        ownerServiceImpl.saveOwner(owner);
-        Cat cat = new Cat("Kisik", Date.valueOf("2010-01-01"), CatBreed.MAINE_COON, CatColor.MIXED);
-        owner.addCat(cat);
-        ownerServiceImpl.saveOwner(owner);
-        when(ownerServiceImpl.findCatById(1, 1)).thenReturn(cat);
-        assertEquals(cat, ownerServiceImpl.findCatById(1, 1));
-    }
 }
