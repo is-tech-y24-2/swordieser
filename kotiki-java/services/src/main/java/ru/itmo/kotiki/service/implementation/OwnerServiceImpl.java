@@ -3,10 +3,8 @@ package ru.itmo.kotiki.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itmo.kotiki.dao.OwnerDao;
-import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.models.Owner;
 import ru.itmo.kotiki.service.interfaces.OwnerService;
-
 
 import java.util.List;
 
@@ -15,7 +13,7 @@ public class OwnerServiceImpl implements OwnerService {
     private final OwnerDao ownerDao;
 
     @Autowired
-    public OwnerServiceImpl(OwnerDao ownerDao){
+    public OwnerServiceImpl(OwnerDao ownerDao) {
         this.ownerDao = ownerDao;
     }
 
@@ -34,14 +32,5 @@ public class OwnerServiceImpl implements OwnerService {
 
     public List<Owner> findAllOwners() {
         return ownerDao.findAll();
-    }
-
-    public Cat findCatById(int ownerId, int catId) {
-        for (Cat cat : findOwner(ownerId).getCats()) {
-            if (catId == cat.getId()){
-                return cat;
-            }
-        }
-        return null;
     }
 }

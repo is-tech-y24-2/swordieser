@@ -33,7 +33,7 @@ public class Converter {
         return catDtos;
     }
 
-    public static List<OwnerDto> ownersToWebOwners(List<Owner> owners){
+    public static List<OwnerDto> ownersToWebOwners(List<Owner> owners) {
         List<OwnerDto> ownerDtos = new ArrayList<>();
         for (Owner owner : owners) {
             ownerDtos.add(Converter.ownerToWebOwner(owner));

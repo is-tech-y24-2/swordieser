@@ -6,13 +6,12 @@ import ru.itmo.kotiki.dao.CatDao;
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.service.interfaces.CatService;
 
-
 import java.util.List;
 
 @Service
 public class CatServiceImpl implements CatService {
     private final CatDao catDao;
-    
+
     @Autowired
     public CatServiceImpl(CatDao catDao) {
         this.catDao = catDao;

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.service.implementation.CatServiceImpl;
-import ru.itmo.kotiki.webModel.Converter;
 import ru.itmo.kotiki.webModel.CatDto;
+import ru.itmo.kotiki.webModel.Converter;
 
 import java.util.List;
 
@@ -20,29 +20,29 @@ public class CatController {
     }
 
     @PostMapping("/create")
-    public CatDto createCat(@RequestBody CatDto catDto){
+    public CatDto createCat(@RequestBody CatDto catDto) {
         return Converter.catToWebCat(catServiceImpl.saveCat(Converter.webCatToCat(catDto)));
     }
 
     @GetMapping("/{id}")
-    public CatDto findCatById(@PathVariable int id){
+    public CatDto findCatById(@PathVariable int id) {
         return Converter.catToWebCat(catServiceImpl.findCat(id));
     }
 
     @GetMapping("/all")
-    public List<CatDto> getAllCats(){
+    public List<CatDto> getAllCats() {
         return Converter.catsToWebCats(catServiceImpl.findAllCats());
     }
 
     @PutMapping("/{id}")
-    public void updateCat(@PathVariable int id, String name){
+    public void updateCat(@PathVariable int id, String name) {
         Cat cat = catServiceImpl.findCat(id);
         cat.setName(name);
         catServiceImpl.saveCat(cat);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCatById(@PathVariable int id){
+    public void deleteCatById(@PathVariable int id) {
         catServiceImpl.deleteCat(catServiceImpl.findCat(id));
     }
 }

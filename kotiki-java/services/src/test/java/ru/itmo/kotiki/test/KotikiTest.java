@@ -9,12 +9,11 @@ import ru.itmo.kotiki.models.CatColor;
 import ru.itmo.kotiki.models.Owner;
 import ru.itmo.kotiki.service.implementation.OwnerServiceImpl;
 
-
 import java.sql.Date;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.*;
 
 public class KotikiTest {
     private Session session;
@@ -22,13 +21,13 @@ public class KotikiTest {
 
 
     @Before
-    public void setup(){
+    public void setup() {
         session = mock(Session.class);
         ownerServiceImpl = mock(OwnerServiceImpl.class);
     }
 
     @Test
-    public void addOwnerTest(){
+    public void addOwnerTest() {
         Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"));
         ownerServiceImpl.saveOwner(owner);
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
@@ -36,7 +35,7 @@ public class KotikiTest {
     }
 
     @Test
-    public void findByIdTest(){
+    public void findByIdTest() {
         Owner owner = new Owner("Serj", Date.valueOf("2002-01-01"));
         ownerServiceImpl.saveOwner(owner);
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
@@ -44,13 +43,13 @@ public class KotikiTest {
     }
 
     @Test
-    public void findCatByIdTest(){
+    public void findCatByIdTest() {
         Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"));
         ownerServiceImpl.saveOwner(owner);
         Cat cat = new Cat("Kisik", Date.valueOf("2010-01-01"), CatBreed.MAINE_COON, CatColor.MIXED);
         owner.addCat(cat);
         ownerServiceImpl.saveOwner(owner);
-        when(ownerServiceImpl.findCatById(1,1)).thenReturn(cat);
-        assertEquals(cat, ownerServiceImpl.findCatById(1,1));
+        when(ownerServiceImpl.findCatById(1, 1)).thenReturn(cat);
+        assertEquals(cat, ownerServiceImpl.findCatById(1, 1));
     }
 }

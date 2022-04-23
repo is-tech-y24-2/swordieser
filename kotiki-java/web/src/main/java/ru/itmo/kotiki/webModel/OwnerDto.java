@@ -1,22 +1,22 @@
 package ru.itmo.kotiki.webModel;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.kotiki.models.Owner;
 
 import java.sql.Date;
 
 
 public class OwnerDto {
-    private String name;
-    private Date birthday;
+    private final String name;
+    private final Date birthday;
 
-    @Autowired
-    public OwnerDto(){
+    public OwnerDto(String name, Date birthday) {
+        this.name = name;
+        this.birthday = birthday;
     }
 
-    public OwnerDto(Owner owner){
-        this.name = owner.getName();;
+    public OwnerDto(Owner owner) {
+        this.name = owner.getName();
         this.birthday = owner.getBirthday();
     }
 

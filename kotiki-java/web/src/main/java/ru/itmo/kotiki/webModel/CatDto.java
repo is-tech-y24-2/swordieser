@@ -1,7 +1,6 @@
 package ru.itmo.kotiki.webModel;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.models.CatBreed;
 import ru.itmo.kotiki.models.CatColor;
@@ -10,17 +9,20 @@ import java.sql.Date;
 
 
 public class CatDto {
-    private String name;
-    private Date birthday;
-    private CatBreed breed;
-    private CatColor color;
+    private final String name;
+    private final Date birthday;
+    private final CatBreed breed;
+    private final CatColor color;
 
-    @Autowired
-    public CatDto(){
+    public CatDto(String name, Date birthday, CatBreed breed, CatColor color) {
+        this.name = name;
+        this.birthday = birthday;
+        this.breed = breed;
+        this.color = color;
     }
 
-    public CatDto(Cat cat){
-        this.name = cat.getName();;
+    public CatDto(Cat cat) {
+        this.name = cat.getName();
         this.birthday = cat.getBirthday();
         this.breed = cat.getBreed();
         this.color = cat.getColor();

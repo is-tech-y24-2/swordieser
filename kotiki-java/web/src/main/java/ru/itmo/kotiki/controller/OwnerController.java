@@ -21,29 +21,29 @@ public class OwnerController {
     }
 
     @PostMapping("/create")
-    public OwnerDto createOwner(@RequestBody OwnerDto ownerDto){
+    public OwnerDto createOwner(@RequestBody OwnerDto ownerDto) {
         return Converter.ownerToWebOwner(ownerServiceImpl.saveOwner(Converter.webOwnerToOwner(ownerDto)));
     }
 
     @GetMapping("/{id}")
-    public OwnerDto findOwnerById(@PathVariable int id){
+    public OwnerDto findOwnerById(@PathVariable int id) {
         return Converter.ownerToWebOwner(ownerServiceImpl.findOwner(id));
     }
 
     @GetMapping("/all")
-    public List<OwnerDto> getAllOwners(){
+    public List<OwnerDto> getAllOwners() {
         return Converter.ownersToWebOwners(ownerServiceImpl.findAllOwners());
     }
 
     @PutMapping("/{id}")
-    public void updateOwner(@PathVariable int id, String name){
+    public void updateOwner(@PathVariable int id, String name) {
         Owner owner = ownerServiceImpl.findOwner(id);
         owner.setName(name);
         ownerServiceImpl.saveOwner(owner);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOwner(@PathVariable int id){
+    public void deleteOwner(@PathVariable int id) {
         ownerServiceImpl.deleteOwner(ownerServiceImpl.findOwner(id));
     }
 }

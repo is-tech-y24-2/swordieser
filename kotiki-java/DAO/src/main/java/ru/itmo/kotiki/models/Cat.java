@@ -10,18 +10,18 @@ public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
-    @Column(name = "birthday")
+    @Column(name = "Birthday")
     private Date birthday;
-    @Column(name = "breed")
+    @Column(name = "Breed")
     @Enumerated(EnumType.STRING)
     private CatBreed breed;
-    @Column(name = "color")
+    @Column(name = "Color")
     @Enumerated(EnumType.STRING)
     private CatColor color;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "Owner_id")
     private Owner owner;
 
     public Cat() {
@@ -35,12 +35,16 @@ public class Cat {
     }
 
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getBirthday() {
@@ -59,11 +63,7 @@ public class Cat {
         return owner;
     }
 
-    public void setOwner(Owner owner){
+    public void setOwner(Owner owner) {
         this.owner = owner;
-    }
-
-    public void setName(String name){
-        this.name = name;
     }
 }
