@@ -24,12 +24,12 @@ public class CatController {
         catServiceImpl.saveCat(Converter.webCatToCat(catDto));
     }
 
-    @GetMapping("/findCat/{id}")
+    @GetMapping("/{id}")
     public CatDto findCatById(@PathVariable int id){
         return Converter.catToWebCat(catServiceImpl.findCat(id));
     }
 
-    @GetMapping("/getAllCats")
+    @GetMapping("/allCats")
     public List<CatDto> getAllCats(){
         return Converter.catsToWebCats(catServiceImpl.findAllCats());
     }

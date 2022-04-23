@@ -25,12 +25,12 @@ public class OwnerController {
         ownerServiceImpl.saveOwner(Converter.webOwnerToOwner(ownerDto));
     }
 
-    @GetMapping("/findOwner/{id}")
+    @GetMapping("/{id}")
     public OwnerDto findOwnerById(@PathVariable int id){
         return Converter.ownerToWebOwner(ownerServiceImpl.findOwner(id));
     }
 
-    @GetMapping("/getAllOwners")
+    @GetMapping("/allOwners")
     public List<OwnerDto> getAllOwners(){
         return Converter.ownersToWebOwners(ownerServiceImpl.findAllOwners());
     }
