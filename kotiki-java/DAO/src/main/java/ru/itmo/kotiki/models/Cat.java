@@ -2,12 +2,10 @@ package ru.itmo.kotiki.models;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
-@Table(name = "cats")
+@Table(name = "Cats")
 public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

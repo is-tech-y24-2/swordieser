@@ -8,7 +8,7 @@ import java.util.List;
 public interface CatService {
     Cat findCat(int id);
 
-    void saveCat(Cat cat);
+    Cat saveCat(Cat cat);
 
     void deleteCat(Cat cat);
 

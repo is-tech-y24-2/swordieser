@@ -20,8 +20,8 @@ public class CatController {
     }
 
     @PostMapping("/create")
-    public void createCat(@RequestBody CatDto catDto){
-        catServiceImpl.saveCat(Converter.webCatToCat(catDto));
+    public CatDto createCat(@RequestBody CatDto catDto){
+        return Converter.catToWebCat(catServiceImpl.saveCat(Converter.webCatToCat(catDto)));
     }
 
     @GetMapping("/{id}")
@@ -29,19 +29,19 @@ public class CatController {
         return Converter.catToWebCat(catServiceImpl.findCat(id));
     }
 
-    @GetMapping("/allCats")
+    @GetMapping("/all")
     public List<CatDto> getAllCats(){
         return Converter.catsToWebCats(catServiceImpl.findAllCats());
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public void updateCat(@PathVariable int id, String name){
         Cat cat = catServiceImpl.findCat(id);
         cat.setName(name);
         catServiceImpl.saveCat(cat);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCatById(@PathVariable int id){
         catServiceImpl.deleteCat(catServiceImpl.findCat(id));
     }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface OwnerService {
     Owner findOwner(int id);
 
-    void saveOwner(Owner owner);
+    Owner saveOwner(Owner owner);
 
     void deleteOwner(Owner owner);
 

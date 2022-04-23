@@ -22,8 +22,9 @@ public class CatServiceImpl implements CatService {
         return catDao.getById(id);
     }
 
-    public void saveCat(Cat cat) {
+    public Cat saveCat(Cat cat) {
         catDao.save(cat);
+        return cat;
     }
 
     public void deleteCat(Cat cat) {

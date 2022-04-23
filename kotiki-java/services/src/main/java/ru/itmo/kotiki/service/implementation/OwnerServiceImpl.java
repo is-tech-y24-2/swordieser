@@ -23,8 +23,9 @@ public class OwnerServiceImpl implements OwnerService {
         return ownerDao.getById(id);
     }
 
-    public void saveOwner(Owner owner) {
+    public Owner saveOwner(Owner owner) {
         ownerDao.save(owner);
+        return owner;
     }
 
     public void deleteOwner(Owner owner) {
