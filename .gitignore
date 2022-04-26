@@ -18,3 +18,4 @@ kotiki-java/web/.mvn
 
 kotiki-java/web/target
 kotiki-java/web/HELP.md
+kotiki-java/web/src/main/java/ru/itmo/kotiki/PasswordGenerator.java
