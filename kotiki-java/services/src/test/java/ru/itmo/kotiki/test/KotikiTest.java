@@ -28,7 +28,7 @@ public class KotikiTest {
 
     @Test
     public void addOwnerTest() {
-        Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"));
+        Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"), 1);
         ownerServiceImpl.saveOwner(owner);
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
         assertEquals("Ben", ownerServiceImpl.findOwner(1).getName());
@@ -36,7 +36,7 @@ public class KotikiTest {
 
     @Test
     public void findByIdTest() {
-        Owner owner = new Owner("Serj", Date.valueOf("2002-01-01"));
+        Owner owner = new Owner("Serj", Date.valueOf("2002-01-01"), 1);
         ownerServiceImpl.saveOwner(owner);
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
         assertEquals(owner, ownerServiceImpl.findOwner(1));
