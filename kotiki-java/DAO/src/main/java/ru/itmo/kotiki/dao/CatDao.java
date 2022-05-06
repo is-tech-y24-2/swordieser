@@ -6,4 +6,6 @@ import ru.itmo.kotiki.models.Cat;
 
 @Repository
 public interface CatDao extends JpaRepository<Cat, Integer> {
+    @Override
+    Cat getById(Integer id);
 }

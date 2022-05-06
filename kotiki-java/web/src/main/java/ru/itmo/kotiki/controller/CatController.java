@@ -2,23 +2,28 @@ package ru.itmo.kotiki.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.kotiki.models.Cat;
+import ru.itmo.kotiki.models.Owner;
+import ru.itmo.kotiki.models.Role;
 import ru.itmo.kotiki.service.implementation.CatServiceImpl;
+import ru.itmo.kotiki.service.implementation.OwnerServiceImpl;
 import ru.itmo.kotiki.webModel.CatDto;
 import ru.itmo.kotiki.webModel.Converter;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/cats")
 public class CatController {
     private final CatServiceImpl catServiceImpl;
+    private final OwnerServiceImpl ownerServiceImpl;
 
     @Autowired
-    public CatController(CatServiceImpl catServiceImpl) {
+    public CatController(CatServiceImpl catServiceImpl, OwnerServiceImpl ownerServiceImpl) {
         this.catServiceImpl = catServiceImpl;
+        this.ownerServiceImpl = ownerServiceImpl;
     }
 
     @PostMapping("/create")
@@ -29,13 +34,7 @@ public class CatController {
     @GetMapping("/{id}")
     public CatDto findCatById(@PathVariable int id) {
         Cat cat = catServiceImpl.findCat(id);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
-
-        if (username.equals("admin") || (username.equals(cat.getOwner().getName()))) {
-            return Converter.catToWebCat(cat);
-        }
-        return null;
+        return Converter.catToWebCat(cat);
     }
 
     @GetMapping("/all")
@@ -43,14 +42,13 @@ public class CatController {
         return Converter.catsToWebCats(catServiceImpl.findAllCats());
     }
 
-    @PutMapping("/{id}")
-    public void updateCat(@PathVariable int id, String name) {
-        Cat cat = catServiceImpl.findCat(id);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
 
-        if (username.equals("admin") || (username.equals(cat.getOwner().getName()))) {
-            cat.setName(name);
+    @PutMapping("/put/{id}")
+    public void updateCat(@PathVariable int id, int owner_id) {
+        Cat cat = catServiceImpl.findCat(id);
+        if (cat != null){
+            Owner owner = ownerServiceImpl.findOwner(owner_id);
+            cat.setOwner(owner);
             catServiceImpl.saveCat(cat);
         }
     }
