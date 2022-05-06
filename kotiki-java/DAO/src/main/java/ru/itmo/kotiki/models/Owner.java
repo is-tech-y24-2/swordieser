@@ -17,14 +17,16 @@ public class Owner {
     private Date birthday;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cat> cats;
+    private int userId;
 
     public Owner() {
     }
 
-    public Owner(String name, Date birthday) {
+    public Owner(String name, Date birthday, int userId) {
         this.name = name;
         this.birthday = birthday;
         this.cats = new ArrayList<>();
+        this.userId = userId;
     }
 
     public int getId() {
@@ -54,5 +56,9 @@ public class Owner {
 
     public void deleteCat(Cat cat) {
         cats.remove(cat);
+    }
+
+    public int getUserId() {
+        return userId;
     }
 }
