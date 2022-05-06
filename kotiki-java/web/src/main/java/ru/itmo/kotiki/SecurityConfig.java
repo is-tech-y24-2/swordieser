@@ -29,16 +29,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/owners/**", "/cats/all", "/cats/create", "/cats/del/**").hasRole("ADMIN")
+                .antMatchers("/owners/**", "/cats/all", "/cats/create", "/cats/del/**", "/cats/put/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll()
-//                .and()
-//                .cors()
-//                .and()
-//                .csrf().disable()
+                .and()
+                .cors()
+                .and()
+                .csrf()
+                .disable()
         ;
     }
 }
