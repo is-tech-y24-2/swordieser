@@ -3,9 +3,6 @@ package ru.itmo.kotiki.test;
 import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
-import ru.itmo.kotiki.models.Cat;
-import ru.itmo.kotiki.models.CatBreed;
-import ru.itmo.kotiki.models.CatColor;
 import ru.itmo.kotiki.models.Owner;
 import ru.itmo.kotiki.service.implementation.OwnerServiceImpl;
 

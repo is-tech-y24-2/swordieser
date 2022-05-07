@@ -11,6 +11,7 @@ public class OwnerDto {
     private final String name;
     private final Date birthday;
 
+
     public OwnerDto(int id, String name, Date birthday) {
         this.id = id;
         this.name = name;
@@ -34,4 +35,5 @@ public class OwnerDto {
     public Date getBirthday() {
         return birthday;
     }
+
 }
