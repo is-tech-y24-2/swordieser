@@ -3,9 +3,6 @@ package ru.itmo.kotiki.test;
 import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
-import ru.itmo.kotiki.models.Cat;
-import ru.itmo.kotiki.models.CatBreed;
-import ru.itmo.kotiki.models.CatColor;
 import ru.itmo.kotiki.models.Owner;
 import ru.itmo.kotiki.service.implementation.OwnerServiceImpl;
 
@@ -28,7 +25,7 @@ public class KotikiTest {
 
     @Test
     public void addOwnerTest() {
-        Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"), 1);
+        Owner owner = new Owner("Ben", Date.valueOf("2000-01-01"));
         ownerServiceImpl.saveOwner(owner);
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
         assertEquals("Ben", ownerServiceImpl.findOwner(1).getName());
@@ -36,7 +33,7 @@ public class KotikiTest {
 
     @Test
     public void findByIdTest() {
-        Owner owner = new Owner("Serj", Date.valueOf("2002-01-01"), 1);
+        Owner owner = new Owner("Serj", Date.valueOf("2002-01-01"));
         ownerServiceImpl.saveOwner(owner);
         when(ownerServiceImpl.findOwner(1)).thenReturn(owner);
         assertEquals(owner, ownerServiceImpl.findOwner(1));
