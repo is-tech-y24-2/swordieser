@@ -22,7 +22,7 @@ public class Converter {
     }
 
     public static Owner webOwnerToOwner(OwnerDto ownerDto) {
-        return new Owner(ownerDto.getName(), ownerDto.getBirthday(), ownerDto.getUserId());
+        return new Owner(ownerDto.getName(), ownerDto.getBirthday());
     }
 
     public static List<CatDto> catsToWebCats(List<Cat> cats) {
