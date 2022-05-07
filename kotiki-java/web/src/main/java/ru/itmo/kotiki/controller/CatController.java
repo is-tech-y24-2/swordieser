@@ -1,18 +1,15 @@
 package ru.itmo.kotiki.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.kotiki.models.Cat;
 import ru.itmo.kotiki.models.Owner;
-import ru.itmo.kotiki.models.Role;
 import ru.itmo.kotiki.service.implementation.CatServiceImpl;
 import ru.itmo.kotiki.service.implementation.OwnerServiceImpl;
 import ru.itmo.kotiki.webModel.CatDto;
 import ru.itmo.kotiki.webModel.Converter;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/cats")
@@ -46,7 +43,7 @@ public class CatController {
     @PutMapping("/put/{id}")
     public void updateCat(@PathVariable int id, int owner_id) {
         Cat cat = catServiceImpl.findCat(id);
-        if (cat != null){
+        if (cat != null) {
             Owner owner = ownerServiceImpl.findOwner(owner_id);
             cat.setOwner(owner);
             catServiceImpl.saveCat(cat);

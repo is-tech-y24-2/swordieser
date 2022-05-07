@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.itmo.kotiki.models.Cat;
 
+import java.util.List;
+
 @Repository
 public interface CatDao extends JpaRepository<Cat, Integer> {
-    @Override
-    Cat getById(Integer id);
+    List<Cat> findCatsByOwnerId(int owner_id);
 }
