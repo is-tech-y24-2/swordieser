@@ -41,10 +41,10 @@ public class CatController {
 
 
     @PutMapping("/put/{id}")
-    public void updateCat(@PathVariable int id, int owner_id) {
+    public void updateCat(@PathVariable int id, int ownerId) {
         Cat cat = catServiceImpl.findCat(id);
         if (cat != null) {
-            Owner owner = ownerServiceImpl.findOwner(owner_id);
+            Owner owner = ownerServiceImpl.findOwner(ownerId);
             cat.setOwner(owner);
             catServiceImpl.saveCat(cat);
         }
